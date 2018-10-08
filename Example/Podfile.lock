@@ -1,0 +1,23 @@
+PODS:
+  - CLFilterLib (1.0.0):
+    - GPUImage
+  - GPUImage (0.1.7)
+
+DEPENDENCIES:
+  - CLFilterLib (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - GPUImage
+
+EXTERNAL SOURCES:
+  CLFilterLib:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CLFilterLib: bfd478360743888e9bf32746b3253847d209ddea
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
+
+PODFILE CHECKSUM: a5369e45153daba6d90522997ee9e8db5498a343
+
+COCOAPODS: 1.5.3

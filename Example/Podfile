@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'CLFilterLib_Example' do
+  pod 'CLFilterLib', :path => '../'
+
+  target 'CLFilterLib_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
