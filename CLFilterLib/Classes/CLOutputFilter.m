@@ -50,7 +50,7 @@
     NSImage *image = [NSImage imageInCFilterBundleWithNamed:imageName];
 #endif
     
-    NSAssert(image, @"To use CLAmatorkaFilter you need to add file from CLFilterLib/Resources to your application bundle.");
+    NSAssert(image, @"You need to add a image from CLFilterLib/Resources to your application bundle.");
     
     lookupImageSource = [[GPUImagePicture alloc] initWithImage:image];
     GPUImageLookupFilter *lookupFilter = [[GPUImageLookupFilter alloc] init];

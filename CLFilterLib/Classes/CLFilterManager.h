@@ -36,7 +36,7 @@ FOUNDATION_EXTERN NSString *CreateTempVideoPath(void);
 + (GPUImageOutput<GPUImageInput> *)getFilterWithMovieFile:(GPUImageMovie *)movieFile
                                                     style:(CLFilterStyle)style;
 
-+ (instancetype)new __deprecated_msg("Used 'init'");
++ (instancetype)new __deprecated_msg("Using 'init'");
 
 @property (nonatomic, weak) id<CLFilterVideoProcessingDelegate>delegate;
 

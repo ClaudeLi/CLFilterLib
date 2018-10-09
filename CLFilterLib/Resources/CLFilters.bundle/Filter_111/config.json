@@ -2,7 +2,7 @@
     "content": {
         "amatorka": {
          "type" : 0,
-         "intensity": 0.75
+         "intensity": 0.5
         }
     },
     "version": "1.1"

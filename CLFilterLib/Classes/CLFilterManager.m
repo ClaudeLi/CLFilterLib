@@ -9,6 +9,8 @@
 #import "CLFilterManager.h"
 #import "CLOutputFilter.h"
 
+static NSInteger startIndex = 100;
+
 NSString *CreateTempVideoPath(){
     NSTimeInterval time = [[NSDate date] timeIntervalSince1970];
     NSString *str = [NSString stringWithFormat:@"%.0f.mp4", time*1000];
@@ -99,7 +101,7 @@ static CGFloat LVignetteEnd = 1.0;
 //            break;
 //    }
     if (style > 0) {
-        style+=100;
+        style+=startIndex;
         NSString *index = [NSString stringWithFormat:@"%ld", (long)style];
         CLOutputFilter *filter = [[CLOutputFilter alloc] initWithFileName:index];
         filterImage = [filter imageByFilteringImage:image];
@@ -192,7 +194,7 @@ static CGFloat LVignetteEnd = 1.0;
 //        }
 //            break;
         default:{
-            style+=100;
+            style+=startIndex;
             NSString *index = [NSString stringWithFormat:@"%ld", (long)style];
             CLOutputFilter *filt = [[CLOutputFilter alloc]initWithFileName:index];
             [movieFile addTarget:filt];

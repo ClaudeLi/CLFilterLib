@@ -1,8 +1,8 @@
 {
     "content": {
-        "years": {
+        "glitch": {
          "type" : 0,
-         "intensity": 0.75
+         "intensity" : 1
         }
     },
     "version": "1.1"

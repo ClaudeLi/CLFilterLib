@@ -1,8 +1,8 @@
 {
     "content": {
-        "sexy": {
+        "oldmovie": {
          "type" : 0,
-         "intensity" : 0.38
+         "intensity" : 0
         }
     },
     "version": "1.1"
