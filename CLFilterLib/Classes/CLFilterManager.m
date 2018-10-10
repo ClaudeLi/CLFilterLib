@@ -8,6 +8,7 @@
 
 #import "CLFilterManager.h"
 #import "CLOutputFilter.h"
+#import <GPUImageBeautifyFilter/GPUImageBeautifyFilter.h>
 
 static NSInteger startIndex = 100;
 
@@ -21,8 +22,8 @@ NSString *CreateTempVideoPath(){
     return path;
 }
 
-static CGFloat LVignetteStart = 0.4;
-static CGFloat LVignetteEnd = 1.0;
+static CGFloat LVignetteStart = 0.6;
+static CGFloat LVignetteEnd = 1;
 
 @interface CLFilterManager ()<GPUImageMovieWriterDelegate>{
     BOOL    _isCancel;
@@ -39,12 +40,12 @@ static CGFloat LVignetteEnd = 1.0;
 
 @implementation CLFilterManager
 
-+ (UIImage *)imageFilterWithImage:(UIImage *)image style:(CLFilterStyle)style{
++ (UIImage *)imageFilterWithImage:(UIImage *)image style:(CLFilterStyle)style enabledBeauty:(BOOL)enabledBeauty{
     UIImage *filterImage = image;
 //    struct GPUVector3  color;
-//    color.one = 38/255;
-//    color.two = 38/255;
-//    color.three = 38/255;
+//    color.one = 138/255;
+//    color.two = 138/255;
+//    color.three = 138/255;
 //    switch (style) {
 //        case 0:
 //            break;
@@ -104,25 +105,34 @@ static CGFloat LVignetteEnd = 1.0;
         style+=startIndex;
         NSString *index = [NSString stringWithFormat:@"%ld", (long)style];
         CLOutputFilter *filter = [[CLOutputFilter alloc] initWithFileName:index];
+        if (enabledBeauty) {
+            GPUImageBeautifyFilter *beautifyFilter = [[GPUImageBeautifyFilter alloc] init];
+            image = [beautifyFilter imageByFilteringImage:image];
+        }
         filterImage = [filter imageByFilteringImage:image];
 //        GPUImageVignetteFilter *filt1 = [[GPUImageVignetteFilter alloc]init];
 //        filt1.vignetteColor = color;
 //        filt1.vignetteStart = VignetteStart;
 //        filt1.vignetteEnd = VignetteEnd;
 //        filterImage = [filt1 imageByFilteringImage:filterImage];
+    }else{
+        if (enabledBeauty) {
+            GPUImageBeautifyFilter *beautifyFilter = [[GPUImageBeautifyFilter alloc] init];
+            filterImage = [beautifyFilter imageByFilteringImage:image];
+        }
     }
     return filterImage;
 }
 
 
-+ (GPUImageOutput<GPUImageInput> *)getFilterWithMovieFile:(GPUImageMovie *)movieFile style:(CLFilterStyle)style{
++ (GPUImageOutput<GPUImageInput> *)getFilterWithMovieFile:(GPUImageMovie *)movieFile style:(CLFilterStyle)style enabledBeauty:(BOOL)enabledBeauty{
     
     GPUImageFilter *filter = [[GPUImageFilter alloc]init];
     
     struct GPUVector3  color;
-    color.one = 38/255;
-    color.two = 38/255;
-    color.three = 38/255;
+    color.one = 138/255;
+    color.two = 138/255;
+    color.three = 138/255;
     GPUImageVignetteFilter *filt1 = [[GPUImageVignetteFilter alloc]init];
     filt1.vignetteColor = color;
     filt1.vignetteStart = LVignetteStart;
@@ -196,11 +206,17 @@ static CGFloat LVignetteEnd = 1.0;
         default:{
             style+=startIndex;
             NSString *index = [NSString stringWithFormat:@"%ld", (long)style];
-            CLOutputFilter *filt = [[CLOutputFilter alloc]initWithFileName:index];
+            CLOutputFilter *filt = [[CLOutputFilter alloc] initWithFileName:index];
             [movieFile addTarget:filt];
             [filt addTarget:filt1];
         }
             break;
+    }
+    if (enabledBeauty) {
+        GPUImageBeautifyFilter *beautifyFilter = [[GPUImageBeautifyFilter alloc] init];
+        [filt1 addTarget:beautifyFilter];
+        [beautifyFilter addTarget:filter];
+        return beautifyFilter;
     }
     [filt1 addTarget:filter];
     return filt1;
@@ -261,9 +277,7 @@ static CGFloat LVignetteEnd = 1.0;
 }
 
 
-- (void)addFilterWithStyle:(CLFilterStyle)style
-                  inputURL:(NSURL *)inputURL
-                outputPath:(NSString *)outputPath{
+- (void)addFilterWithStyle:(CLFilterStyle)style inputURL:(NSURL *)inputURL outputPath:(NSString *)outputPath{
     if (_recode) {
         [self recodeWithVideoURL:inputURL outputPath:outputPath style:style];
     }else{
@@ -404,11 +418,17 @@ static CGFloat LVignetteEnd = 1.0;
 //        if (asetTrack.naturalSize.width/asetTrack.naturalSize.height < 1) {
 //            videoSize = CGSizeMake(360, 640);
 //        }
+        long long bit = 1200000;
+        if (MIN(videoSize.width, videoSize.height) >= 540) {
+            bit = 1500000;
+        }else if (MIN(videoSize.width, videoSize.height) >= 700) {
+            bit = 1600000;
+        }
         NSDictionary* settings = @{AVVideoCodecKey : AVVideoCodecH264,
                                    AVVideoWidthKey : @(videoSize.width),
                                    AVVideoHeightKey : @(videoSize.height),
                                    AVVideoCompressionPropertiesKey: @ {
-                                       AVVideoAverageBitRateKey : @(1200000),
+                                       AVVideoAverageBitRateKey : @(bit),
 //                                       AVVideoExpectedSourceFrameRateKey : @(25),
 //                                       AVVideoMaxKeyFrameIntervalKey : @(25), // 关键帧
 //                                       AVVideoMaxKeyFrameIntervalDurationKey : @(1.0),
@@ -432,7 +452,7 @@ static CGFloat LVignetteEnd = 1.0;
         
         // 2. Add filter effect
         _filter = nil;
-        _filter = [CLFilterManager getFilterWithMovieFile:_movieFile style:style];
+        _filter = [CLFilterManager getFilterWithMovieFile:_movieFile style:style enabledBeauty:_enabledBeauty];
         
 //        CGFloat duration = CMTimeGetSeconds([asset duration]);
 //        UIView *water = [CLVideoWaterDeal getWaterViewWithVideoSize:videoSize videoTransform:asetTrack.preferredTransform];

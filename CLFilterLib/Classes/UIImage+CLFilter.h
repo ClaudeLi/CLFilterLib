@@ -12,7 +12,7 @@ FOUNDATION_EXTERN NSBundle *CLFilterBundle(void);
 
 @interface UIImage (CLFilter)
 
-- (UIImage *)imageFilterWithStyle:(CLFilterStyle)style;
+- (UIImage *)imageFilterWithStyle:(CLFilterStyle)style enabledBeauty:(BOOL)enabledBeauty;
 
 + (UIImage *)imageInCFilterBundleWithNamed:(NSString *)named;
 

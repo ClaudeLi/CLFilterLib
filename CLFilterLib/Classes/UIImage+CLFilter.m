@@ -18,8 +18,8 @@ NSBundle *CLFilterBundle(){
 
 @implementation UIImage (CLFilter)
 
-- (UIImage *)imageFilterWithStyle:(CLFilterStyle)style{
-    return [CLFilterManager imageFilterWithImage:self style:style];
+- (UIImage *)imageFilterWithStyle:(CLFilterStyle)style enabledBeauty:(BOOL)enabledBeauty{
+    return [CLFilterManager imageFilterWithImage:self style:style enabledBeauty:enabledBeauty];
 }
 
 + (UIImage *)imageInCFilterBundleWithNamed:(NSString *)named{

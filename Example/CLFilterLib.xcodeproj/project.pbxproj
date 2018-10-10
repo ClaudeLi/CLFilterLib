@@ -339,11 +339,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-CLFilterLib_Example/Pods-CLFilterLib_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CLFilterLib/CLFilterLib.framework",
 				"${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework",
+				"${BUILT_PRODUCTS_DIR}/GPUImageBeautifyFilter/GPUImageBeautifyFilter.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CLFilterLib.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImageBeautifyFilter.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

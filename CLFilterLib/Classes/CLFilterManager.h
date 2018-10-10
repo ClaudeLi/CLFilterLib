@@ -20,10 +20,12 @@ FOUNDATION_EXTERN NSString *CreateTempVideoPath(void);
  
  @param image 图片
  @param style 滤镜风格
+ @param enabledBeauty 开启美颜
  @return 带滤镜图片
  */
 + (UIImage *)imageFilterWithImage:(UIImage *)image
-                            style:(CLFilterStyle)style;
+                            style:(CLFilterStyle)style
+                    enabledBeauty:(BOOL)enabledBeauty;
 
 
 /**
@@ -31,16 +33,19 @@ FOUNDATION_EXTERN NSString *CreateTempVideoPath(void);
  
  @param movieFile movieFile
  @param style 滤镜风格
+ @param enabledBeauty 开启美颜
  @return 组合滤镜
  */
 + (GPUImageOutput<GPUImageInput> *)getFilterWithMovieFile:(GPUImageMovie *)movieFile
-                                                    style:(CLFilterStyle)style;
+                                                    style:(CLFilterStyle)style
+                                            enabledBeauty:(BOOL)enabledBeauty;
 
 + (instancetype)new __deprecated_msg("Using 'init'");
 
 @property (nonatomic, weak) id<CLFilterVideoProcessingDelegate>delegate;
 
 @property (nonatomic, assign) BOOL recode;
+@property (nonatomic, assign) BOOL enabledBeauty;
 
 - (void)addFilterWithStyle:(CLFilterStyle)style
                   inputURL:(NSURL *)inputURL

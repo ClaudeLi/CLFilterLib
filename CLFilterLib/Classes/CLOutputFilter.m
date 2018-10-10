@@ -29,6 +29,9 @@
     NSString *file = [NSString stringWithFormat:@"Filter_%@", fileName];
     NSString *path = [CLFilterBundle() pathForResource:[file stringByAppendingPathComponent:@"config"] ofType:@"json"];
     NSData *data = [[NSData alloc] initWithContentsOfFile:path];
+    if (!data) {
+        return nil;
+    }
     NSError *error;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
     if (error) {
