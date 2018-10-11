@@ -1,8 +1,8 @@
 PODS:
   - CLFilterLib (1.0.2):
-    - GPUImageBeautifyFilter
+    - GPUImageBeautifyFilter (~> 1.0.0)
   - GPUImage (0.1.7)
-  - GPUImageBeautifyFilter (0.1.0):
+  - GPUImageBeautifyFilter (1.0.0):
     - GPUImage
 
 DEPENDENCIES:
@@ -18,9 +18,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CLFilterLib: fc49c41bb83bafc03539e8f7124fc0a01084dac0
+  CLFilterLib: a62f501f70d839a42edeaa77e25d116dd6abfadb
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
-  GPUImageBeautifyFilter: 9d52e1350c6dde3f375933fc3f4907feb046665c
+  GPUImageBeautifyFilter: 6eb451b50c395109172ae1f9e69c4241d0126c09
 
 PODFILE CHECKSUM: a5369e45153daba6d90522997ee9e8db5498a343
 

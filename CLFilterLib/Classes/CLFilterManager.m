@@ -8,7 +8,7 @@
 
 #import "CLFilterManager.h"
 #import "CLOutputFilter.h"
-#import <GPUImageBeautifyFilter/GPUImageBeautifyFilter.h>
+#import <GPUImageBeautifyFilter/GPUImageBeautyFilter.h>
 
 static NSInteger startIndex = 100;
 
@@ -106,7 +106,7 @@ static CGFloat LVignetteEnd = 1;
         NSString *index = [NSString stringWithFormat:@"%ld", (long)style];
         CLOutputFilter *filter = [[CLOutputFilter alloc] initWithFileName:index];
         if (enabledBeauty) {
-            GPUImageBeautifyFilter *beautifyFilter = [[GPUImageBeautifyFilter alloc] init];
+            GPUImageBeautyFilter *beautifyFilter = [[GPUImageBeautyFilter alloc] init];
             image = [beautifyFilter imageByFilteringImage:image];
         }
         filterImage = [filter imageByFilteringImage:image];
@@ -117,7 +117,7 @@ static CGFloat LVignetteEnd = 1;
 //        filterImage = [filt1 imageByFilteringImage:filterImage];
     }else{
         if (enabledBeauty) {
-            GPUImageBeautifyFilter *beautifyFilter = [[GPUImageBeautifyFilter alloc] init];
+            GPUImageBeautyFilter *beautifyFilter = [[GPUImageBeautyFilter alloc] init];
             filterImage = [beautifyFilter imageByFilteringImage:image];
         }
     }
@@ -213,7 +213,7 @@ static CGFloat LVignetteEnd = 1;
             break;
     }
     if (enabledBeauty) {
-        GPUImageBeautifyFilter *beautifyFilter = [[GPUImageBeautifyFilter alloc] init];
+        GPUImageBeautyFilter *beautifyFilter = [[GPUImageBeautyFilter alloc] init];
         [filt1 addTarget:beautifyFilter];
         [beautifyFilter addTarget:filter];
         return beautifyFilter;
